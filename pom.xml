@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kst</groupId>
+    <artifactId>financial-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>com.kst financial-system</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kotlin.version>1.9.23</kotlin.version>
+        <kotlin.code.style>official</kotlin.code.style>
+        <junit.version>4.13.1</junit.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+    </properties>
+
+    <modules>
+        <module>ms-config</module>
+<!--        <module>credit-microservice</module>-->
+<!--        <module>deposit-microservice</module>-->
+<!--        <module>discovery-microservice</module>-->
+<!--        <module>gateway-microservice</module>-->
+<!--        <module>user-microservice</module>-->
+<!--        <module>info-microservice</module>-->
+<!--        <module>mockbank-microservice</module>-->
+<!--        <module>moneytransfer-microservice</module>-->
+    </modules>
+
+</project>
