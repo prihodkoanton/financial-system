@@ -1,0 +1,9 @@
+server:
+  port: 8761
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${app.server.url}:8761/eureka/
+    registerWithEureka: false
+    fetchRegistry: false

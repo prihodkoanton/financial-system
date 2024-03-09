@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: discovery
+  config:
+    import: optional:configserver:${app.server.url}:8888
+  cloud:
+    config:
+      fail-fast: true
+
