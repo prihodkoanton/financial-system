@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+
+  db-user:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=ms-user
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=1234
+    restart: always
+    ports:
+      - 5434:5432
+    volumes:
+      - db_user:/var/lib/postgresql/data
+
+  app-config:
+    build:
+      context: ./ms-config
+      dockerfile: Dockerfile
+    container_name: ms-config
+    restart: always
+    ports:
+      - 8888:8888
+
+  app-discovery:
+    build:
+      context: ./ms-discovery
+      dockerfile: Dockerfile
+    container_name: ms-discovery
+    restart: always
+    ports:
+      - 8761:8761
+    depends_on:
+      - app-config
+
+  app-user:
+    build:
+      context: ./ms-user
+      dockerfile: Dockerfile
+    container_name: ms-user
+    restart: always
+    ports:
+      - 8200:8200
+    depends_on:
+      - db-user
+      - app-config
+      - app-discovery
+
+  app-gateway:
+    build:
+      context: ./ms-gateway
+      dockerfile: Dockerfile
+    container_name: ms-gateway
+    restart: always
+    ports:
+      - 8900:8900
+    depends_on:
+      - app-config
+      - app-discovery
+      - app-user
+
+volumes:
+  db_user:
