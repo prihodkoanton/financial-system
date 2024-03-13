@@ -4,13 +4,23 @@ databaseChangeLog:
       author: Anton Prihodko
       changes:
         - createTable:
-            tableName: Users
+            tableName: users
             columns:
               - column:
                   name: id
                   type: bigint
                   constraints:
                     primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
                     nullable: false
               - column:
                   name: email
@@ -26,23 +36,18 @@ databaseChangeLog:
               - column:
                   name: registration_date
                   type: timestamp
-                  constraints:
-                    nullable: false
-              - column:
-                  name: first_name
-                  type: varchar(100)
-              - column:
-                  name: last_name
-                  type: varchar(100)
-              - column:
-                  name: role
-                  type: varchar(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: created_at
-                  type: timestamp
                   defaultValue: now()
                   constraints:
                     nullable: false
                   remarks: When the record created
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: users
+                  baseColumnNames: role_id
+                  constraintName: FK_users_role_id
+                  referencedTableName: roles
+                  referencedColumnNames: id
