@@ -1,0 +1,28 @@
+server:
+  port: 8200
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${app.server.url}:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5434/ms-user
+    username: admin
+    password: 1234
+
+  liquibase:
+    enabled: true
+    change-log: classpath:liquibase/changelog-master.yml
+    database-change-log-table: schema_history
+    database-change-log-lock-table: schema_lock_history
