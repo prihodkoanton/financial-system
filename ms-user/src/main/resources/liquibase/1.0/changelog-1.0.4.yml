@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table for RolesAccesses
+      author: Anton Prihodko
+      changes:
+        - createTable:
+            tableName: roles_accesses
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: access_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+                  remarks: When the record created
+              - addForeignKeyConstraint:
+                  baseTableName: roles_accesses
+                  baseColumnNames: role_id
+                  constraintName: FK_roles_accesses_role_id
+                  referencedTableName: roles
+                  referencedColumnNames: id
+              - addForeignKeyConstraint:
+                  baseTableName: roles_accesses
+                  baseColumnNames: access_id
+                  constraintName: FK_roles_accesses_access_id
+                  referencedTableName: accesses
+                  referencedColumnNames: id

@@ -20,9 +20,9 @@
 
     <modules>
         <module>ms-config</module>
-<!--        <module>credit-microservice</module>-->
-<!--        <module>deposit-microservice</module>-->
-<!--        <module>discovery-microservice</module>-->
+        <module>ms-discovery</module>
+        <module>ms-gateway</module>
+        <module>ms-user</module>
 <!--        <module>gateway-microservice</module>-->
 <!--        <module>user-microservice</module>-->
 <!--        <module>info-microservice</module>-->
