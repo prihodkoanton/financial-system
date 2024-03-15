@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table for Action like history
+      author: Anton Prihodko
+      changes:
+        - createTable:
+            tableName: actions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+                  remarks: When the record created
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+                  remarks: When the record was last updated
+              - addForeignKeyConstraint:
+                  baseTableName: actions
+                  baseColumnNames: user_id
+                  constraintName: FK_actions_user_id
+                  referencedTableName: users
+                  referencedColumnNames: id

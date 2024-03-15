@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: Create table for Users
+      id: Create table for Access which has user can to provide to another user
       author: Anton Prihodko
       changes:
         - createTable:
-            tableName: users
+            tableName: accesses
             columns:
               - column:
                   name: id
@@ -14,48 +14,48 @@ databaseChangeLog:
                     autoIncrement: true
                     nullable: false
               - column:
-                  name: first_name
-                  type: varchar(255)
+                  name: owner_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: last_name
-                  type: varchar(255)
+                  name: accessed_user_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: email
-                  type: varchar(255)
-                  constraints:
-                    unique: true
-                    nullable: false
-              - column:
-                  name: password
-                  type: varchar(255)
+                  name: read_permission
+                  type: boolean
                   constraints:
                     nullable: false
               - column:
-                  name: registration_date
+                  name: write_permission
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
                   type: timestamp
                   defaultValue: now()
                   constraints:
                     nullable: false
                   remarks: When the record created
               - column:
-                  name: update_at
+                  name: updated_at
                   type: timestamp
-                  defaultValueComputed: now()
+                  defaultValue: now()
                   constraints:
                     nullable: false
                   remarks: When the record was last updated
-              - column:
-                  name: role_id
-                  type: bigint
-                  constraints:
-                    nullable: false
               - addForeignKeyConstraint:
-                  baseTableName: users
-                  baseColumnNames: role_id
-                  constraintName: FK_users_role_id
-                  referencedTableName: roles
+                  baseTableName: accesses
+                  baseColumnNames: owner_id
+                  constraintName: FK_accesses_owner_id
+                  referencedTableName: users
+                  referencedColumnNames: id
+              - addForeignKeyConstraint:
+                  baseTableName: accesses
+                  baseColumnNames: accessed_user_id
+                  constraintName: FK_accessed_user_id
+                  referencedTableName: users
                   referencedColumnNames: id
